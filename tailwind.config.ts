@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+const { fontFamily } = require('tailwindcss/defaultTheme');
 
 const config: Config = {
     darkMode: ["class"],
@@ -9,7 +10,9 @@ const config: Config = {
     "*.{js,ts,jsx,tsx,mdx}"
   ],
   theme: {
-  	extend: {
+  	extend: { fontFamily: {
+        montserrat: ["Montserrat", ...fontFamily.sans], // Add Montserrat font
+      },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

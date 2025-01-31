@@ -1,3 +1,4 @@
+const { fontFamily } = require('tailwindcss/defaultTheme');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -11,6 +12,9 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        montserrat: ["Montserrat", ...fontFamily.sans],
+      },
       colors: {
         border: "hsl(var(--border))",
         background: "hsl(var(--background))",

@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 
 @layer base {
   :root {
@@ -16,7 +17,7 @@
 /* Glassmorphic effect for navigation dropdown */
 .navigation-menu-content {
   backdrop-filter: blur(12px);
-  background: rgba(229, 229, 229, 0.163);
+  background: rgba(176, 176, 176, 0.247);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -26,12 +27,16 @@
 }
 
 .hero-gradient {
-  background: linear-gradient(135deg, #0061ff 0%, #00a6ff 100%);
+  background: radial-gradient(24.45% 88.58% at 23.57% 2%, #00e9ea 0%, #1f80f0 52.08%, #005bc4 100%);
 }
 
 .diagonal-clip {
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
 }
+.footer-clip {
+  clip-path: polygon(0 0, 100% 29%, 100% 100%, 0% 100%);
+  background: radial-gradient(24.45% 88.58% at 23.57% 2%, #00e9ea 0%, #1f80f0 52.08%, #005bc4 100%);
+} 
 
 .diagonal-white {
   clip-path: polygon(67% 0,100% 0,100% 68%,80% 100%,0 100%,32% 51%);
@@ -59,7 +64,7 @@
     transform: translateX(-30%); /* Start off-screen to the left */
   }
   100% {
-    transform: translateX(10%); /* End at its original position */
+    transform: translateX(-2%); /* End at its original position */
   }
 }
 @keyframes slideRightToLeftbg {
@@ -69,6 +74,21 @@
   100% {
     transform: translateX(2%); /* End at its original position */
   }
+}
+@keyframes floating {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px); /* Moves the element up */
+  }
+  100% {
+    transform: translateY(0); /* Returns to original position */
+  }
+}
+
+.floating {
+  animation: floating 3s ease-in-out infinite; /* Applying the animation */
 }
 
 .bgRightToLeft-slide {

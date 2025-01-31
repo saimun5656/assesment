@@ -1,7 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { ChevronDown, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -14,7 +15,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
-
+import Icon from "../public/icon.svg"
+import IconAlt from "../public/iconAlt.svg"
 const solutions = [
   {
     title: "Digital Banking",
@@ -54,34 +56,79 @@ const services = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isServicesOpen, setIsServicesOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [lastScrollY, setLastScrollY] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+
+      if (currentScrollY > lastScrollY) {
+        setIsVisible(false)
+      } else {
+        setIsVisible(true)
+      }
+
+      if (currentScrollY > 0) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [lastScrollY])
+
+  const navbarClasses = `
+    fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out
+    ${isVisible ? "translate-y-0" : "-translate-y-full"}
+    ${isScrolled ? "bg-white shadow-md" : "bg-transparent"}
+  `
+
+  const textColorClass = isScrolled ? "text-primary" : "text-white"
+  const buttonColorClass = isScrolled
+    ? "bg-primary text-white hover:bg-primary/90"
+    : "bg-white text-primary hover:bg-white/90"
 
   return (
-    <header className="md:relative fixed top-0 left-0 right-0 bg-transparent lg:max-w-[90vw] md:max-w-[95vw] mx-auto">
-      <nav className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20 ">
+    <header className={navbarClasses}>
+      <nav className=" mx-auto lg:max-w-[85vw] md:max-w-[95vw]">
+        <div className="flex items-center justify-between h-20">
           <div>
-          <Link href="/" className="text-white font-bold text-2xl">
-              ANYTECH
+            <Link href="/" className={`font-bold text-2xl ${textColorClass}`}>
+            <Image
+                src={isScrolled ? IconAlt : Icon}
+                alt="ANYTECH"
+                width={140}
+                height={30}
+                className=""
+              />
             </Link>
           </div>
           <div className="flex items-center gap-4">
-           
             <div className="hidden md:flex items-center gap-6">
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="text-white bg-transparent">Solutions</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className={`bg-transparent ${textColorClass}`}>
+                      Solutions
+                    </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <ul className="grid w-[400px] gap-3 p-4 backdrop-blur-md bg-white/10 border border-white/20">
+                      <ul className="grid w-[400px] gap-3 p-4 bg-white shadow-md">
                         {solutions.map((solution) => (
                           <li key={solution.title}>
                             <NavigationMenuLink asChild>
                               <Link
                                 href={solution.href}
-                                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/20 hover:text-white focus:bg-white/20 focus:text-white"
+                                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 hover:text-primary focus:bg-slate-100 focus:text-primary"
                               >
-                                <div className="text-sm font-medium leading-none text-white">{solution.title}</div>
-                                <p className="line-clamp-2 text-sm leading-snug text-white/70">
+                                <div className="text-sm font-medium leading-none">{solution.title}</div>
+                                <p className="line-clamp-2 text-sm leading-snug text-slate-600">
                                   {solution.description}
                                 </p>
                               </Link>
@@ -93,29 +140,29 @@ export default function Navbar() {
                   </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>
-              
+
               <Link href="/service">
-                <Button variant="link" className="text-white">
+                <Button variant="link" className={textColorClass}>
                   Service
                 </Button>
               </Link>
               <Link href="/about">
-                <Button variant="link" className="text-white">
+                <Button variant="link" className={textColorClass}>
                   About Us
                 </Button>
               </Link>
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <Button variant="ghost" className="text-white">
+            <Button variant="ghost" className={textColorClass}>
               EN
             </Button>
             <Link href="/contact">
-              <Button className="hidden md:inline-flex bg-white text-primary hover:bg-white/90">Contact Us</Button>
+              <Button className={`hidden md:inline-flex ${buttonColorClass}`}>Contact Us</Button>
             </Link>
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild className="md:hidden">
-                <Button variant="ghost" className="text-white p-0">
+                <Button variant="ghost" className={`p-0 ${textColorClass}`}>
                   {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                 </Button>
               </SheetTrigger>
@@ -141,9 +188,8 @@ export default function Navbar() {
                       </CollapsibleContent>
                     </Collapsible>
 
-                    
-                    <Link href="/about" className="text-white text-2xl font-normal" onClick={() => setIsOpen(false)}>
-                     Services
+                    <Link href="/service" className="text-white text-2xl font-normal" onClick={() => setIsOpen(false)}>
+                      Services
                     </Link>
                     <Link href="/about" className="text-white text-2xl font-normal" onClick={() => setIsOpen(false)}>
                       About Us
