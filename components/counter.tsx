@@ -7,9 +7,10 @@ interface CounterProps {
   end: number
   duration?: number
   prefix?: string
+  suffix?: string
 }
 
-export default function Counter({ end, duration = 2000, prefix = "" }: CounterProps) {
+export default function Counter({ end, duration = 2000, prefix = "", suffix = "" }: CounterProps) {
   const [count, setCount] = useState(0)
   const { ref, inView } = useInView({
     threshold: 0.5,
@@ -43,9 +44,10 @@ export default function Counter({ end, duration = 2000, prefix = "" }: CounterPr
   }, [end, duration, inView])
 
   return (
-    <div ref={ref} className="text-4xl font-bold text-primary">
+    <div ref={ref} className="md:text-[80px] text-4xl font-bold text-primary">
       {prefix}
       {count}
+      {suffix}
     </div>
   )
 }

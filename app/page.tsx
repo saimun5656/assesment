@@ -218,55 +218,25 @@ export default function Home() {
 
       {/* Carrosel Section */}
       <Carrosel></Carrosel>
-
-      {/* Future of Finance Section */}
-
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold mb-12 text-center">The future of finance</h2>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="space-y-6">
-                <h3 className="text-2xl font-bold">Purpose-built financial services</h3>
-                <p className="text-gray-600">
-                  Elevate customer experience and achieve agile financial product innovation with the world's first,
-                  consumer-centric, real-time transaction account processing and credit limit management system.
-                </p>
-                <div className="flex gap-4">
-                  <Button variant="outline">
-                    Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-              <div className="relative h-[300px]">
-                <Image
-                  src="/placeholder.svg?height=300&width=400"
-                  alt="Financial technology illustration"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-            </div>
-          </div>
+      <div className="max-h-[240px] md:my-sm my-lg w-full min-h-[80px]">
+          <Image src={bg4} alt="" ></Image>
         </div>
-      </section>
-
       {/* Stats Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
+      <section className="py-20">
+        <div className="lg:max-w-[70vw] md:max-w-[75vw] max-w-[65vw] mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
+            <div className="md:grid md:grid-cols-3 flex flex-col gap-8">
+              <div className="text-center flex md:flex-col md:items-center md:justify-center  gap-10 md:border-0 border-b-2 border-dashed border-blue-300 justify-between pb-4">
                 <Counter end={20} prefix=">" />
-                <div className="text-gray-600">Years of experience</div>
+                <div className="text-gray-600 md:text-2xl text-lg font-bold md:font-normal">Years of experience</div>
               </div>
-              <div className="text-center">
-                <Counter end={40} prefix="" />
-                <div className="text-gray-600">Financial institutions</div>
+              <div className="text-center flex md:flex-col md:items-center md:justify-center  gap-10 md:border-0 border-b-2 border-dashed border-blue-300 justify-between pb-4">
+                <Counter end={40} prefix="" suffix="+"/>
+                <div className="text-gray-600 md:text-2xl text-lg font-bold md:font-normal">Financial institutions</div>
               </div>
-              <div className="text-center">
-                <Counter end={200} prefix=">" />
-                <div className="text-gray-600">Customers daily</div>
+              <div className="text-center flex md:flex-col md:items-center md:justify-center gap-10 md:border-0 border-b-2 border-dashed border-blue-300 justify-between pb-4">
+                <Counter end={200} prefix=">" suffix="m"/>
+                <div className="text-gray-600 md:text-2xl text-lg font-bold md:font-normal">Customers daily</div>
               </div>
             </div>
           </div>

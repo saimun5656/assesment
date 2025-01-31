@@ -1,20 +1,71 @@
+"use client"
 import Link from "next/link"
 import Image from "next/image"
+import { motion } from "framer-motion";
 import Icon from "../public/icon.svg"
+import Bg1 from "../public/backgrounds/footerbg1.svg";
+import Bg2 from "../public/backgrounds/footerbg2.svg";
+import { useState } from "react";
+
 export default function Footer() {
+
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+    
+      const handleMouseMove = (e: { clientX: any; clientY: any; currentTarget: any }) => {
+        const { clientX, clientY, currentTarget } = e;
+        const { width, height } = currentTarget.getBoundingClientRect();
+    
+        // Normalize movement between -5% to 5%
+        const moveX = parseFloat(((clientX / width) * 2 - 1).toFixed(2));
+        const moveY = parseFloat(((clientY / height) * 2 - 1).toFixed(2));
+    
+        setPosition({ x: moveX, y: moveY });
+      };
+
   return (
     <div className="w-full">
       {/* Top Section with gradient background and upper diagonal shape */}
-      <div className="w-full relative overflow-hidden h-[500px] footer-clip ">
-        
-        {/* <div
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.1) 50%, transparent 75%)",
-            backgroundSize: "200% 200%",
-            animation: "gradient 15s ease infinite",
-          }}
-        /> */}
+      <div className="w-full relative overflow-hidden h-[500px] footer-clip " onMouseMove={handleMouseMove}
+      >
+        {/* Left to Right Animation */}
+        <motion.div
+          initial={{ x: "-100%" }}
+          animate={{ x: 0 }}
+          transition={{ duration: 2.5, ease: "easeInOut" }}
+          className="absolute inset-0 w-full h-full"
+        >
+          <Image
+            src={Bg1}
+            alt="Left Animated Background"
+            layout="fill"
+            objectFit="cover"
+            style={{
+                transform: `translate3d(${-position.x}%, ${-position.y}%, 0)`,
+              }}
+            className="opacity-60"
+          />
+        </motion.div>
+
+        {/* Right to Left Animation */}
+        <motion.div
+          initial={{ x: "100%" }}
+          animate={{ x: 0 }}
+          transition={{ duration: 2.5, ease: "easeInOut" }}
+          className="absolute inset-0 w-full h-full"
+        >
+          <Image
+            src={Bg2}
+            alt="Right Animated Background"
+            layout="fill"
+            objectFit="cover"
+            className="opacity-60"
+            style={{
+                transform: `translate3d(${position.x}%, ${-position.y}%, 0)`,
+              }}
+          />
+        </motion.div>
+
+
         <div className="lg:max-w-[85vw] md:max-w-[95vw] mx-auto mt-20 py-20 relative z-10">
           <h1 className="text-white text-2xl md:text-5xl font-bold mb-4">Legacy no longer</h1>
           <p className="text-white text-xl md:text-2xl mb-8">
@@ -82,5 +133,4 @@ export default function Footer() {
       </footer>
     </div>
   )
-}
-
+} 
