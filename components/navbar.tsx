@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
@@ -90,14 +89,14 @@ export default function Navbar() {
     ${isScrolled ? "bg-white shadow-md" : "bg-transparent"}
   `
 
-  const textColorClass = isScrolled ? "text-primary" : "text-white"
+  const textColorClass = isScrolled ? "md:text-primary" : "text-white"
   const buttonColorClass = isScrolled
     ? "bg-primary text-white hover:bg-primary/90"
     : "bg-white text-primary hover:bg-white/90"
 
   return (
     <header className={navbarClasses}>
-      <nav className=" mx-auto lg:max-w-[85vw] md:max-w-[95vw]">
+      <nav className=" mx-auto lg:max-w-[85vw] md:max-w-[95vw] max-w-[88vw]">
         <div className="flex items-center justify-between h-20">
           <div>
             <Link href="/" className={`font-bold text-2xl ${textColorClass}`}>
@@ -106,7 +105,14 @@ export default function Navbar() {
                 alt="ANYTECH"
                 width={140}
                 height={30}
-                className=""
+                className="hidden md:block"
+              />
+              <Image
+                src={Icon}
+                alt="ANYTECH"
+                width={140}
+                height={30}
+                className="md:hidden block"
               />
             </Link>
           </div>
@@ -154,7 +160,7 @@ export default function Navbar() {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <Button variant="ghost" className={textColorClass}>
+            <Button variant="" className={textColorClass}>
               EN
             </Button>
             <Link href="/contact">
@@ -162,7 +168,7 @@ export default function Navbar() {
             </Link>
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild className="md:hidden">
-                <Button variant="ghost" className={`p-0 ${textColorClass}`}>
+                <Button variant="" className={`p-0 ${textColorClass}`}>
                   {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                 </Button>
               </SheetTrigger>
