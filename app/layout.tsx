@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "AnyTech - Future of Finance",
   description: "Reimagine financial services with AnyTech's open platform",
+  icons:"https://cdn.sanity.io/images/6jywt20u/production/1054f5a62fb7870110b5b01583fb2bb300d3a948-75x76.png"
 }
 
 export default function RootLayout({

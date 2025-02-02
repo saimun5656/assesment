@@ -1,7 +1,8 @@
+import Banner from "@/components/banner"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CheckCircle } from "lucide-react"
-
+import bg1 from "../../public/backgrounds/WaveLinesDesktop2.svg"
 const services = [
   {
     title: "Digital Transformation",
@@ -20,14 +21,8 @@ const services = [
 export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="hero-gradient text-white py-20">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-4">Our Services</h1>
-          <p className="text-lg opacity-90 max-w-2xl">
-            Comprehensive financial technology solutions designed to transform your business
-          </p>
-        </div>
-      </div>
+
+      <Banner Bg1={bg1} Bg2={bg1}></Banner>
 
       <div className="container mx-auto px-4 py-20">
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">

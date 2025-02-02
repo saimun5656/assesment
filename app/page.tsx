@@ -9,12 +9,16 @@ import Carrosel from "@/components/carrosel"
 import bg2 from "../public/backgrounds/WaveLinesDesktop2.svg"
 import bg3 from "../public/backgrounds/WaveLinesDesktop3.svg"
 import bg4 from "../public/backgrounds/section2.svg"
+import mobilebg1 from "../public/backgrounds/mobilebg1.svg"
+import mobilebg2 from "../public/backgrounds/mobilebg2.svg"
 import cardbg from "../public/cardbackground.svg"
 import cardforbg from "../public/cardforeground.png"
 import { useScroll, motion, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { use, useState } from "react"
 import Partners from "@/components/partners"
+import { FeaturesSection } from "@/components/features-section/featuresSection"
+
 
 
 const features = [
@@ -62,7 +66,7 @@ export default function Home() {
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
 
   // Mapping scroll progress (0 → 1) to translateY (-3% to 3%)
-  const translateY = useTransform(scrollYProgress, [0, 1], ["-4%", "4%"]);
+  const translateY = useTransform(scrollYProgress, [0, 1], ["4%", "-4%"]);
 
 
   return (
@@ -70,16 +74,25 @@ export default function Home() {
       {/* Hero Section */}
       <div className="hero-gradient -translate-y-20 diagonal-clip min-h-screen flex items-center overflow-hidden  lg:h-[max(620px,_calc(92vh-49px))] h-auto relative w-full text-white lg:bg-clip-hero-container pt-[30%] md:pt-[20%] lg:pt-0 max-lg:pb-[15%]" onMouseMove={handleMouseMove}>
 
+        {/* mobile BG */}
+        <div className="md:hidden absolute z-30 top-0 inset-0 transition-transform duration-300 ease-out">
 
+          <Image src={mobilebg1} alt={""} className="absolute top-52 scale-150 object-cover bgleftToRight-slide" />
+        </div>
+        <div className="md:hidden block absolute z-30 top-0 inset-0 transition-transform duration-300 ease-out  ">
 
-        <div className="absolute z-30  top-10 inset-0 transition-transform duration-500 ease-out" style={{
+          <Image src={mobilebg2} alt={""} className="absolute top-52 scale-150 object-cover bgRightToLeft-slide" />
+        </div>
+
+        {/* desktop bg */}
+        <div className="hidden md:block absolute z-30  top-10 inset-0 transition-transform duration-500 ease-out" style={{
           transform: `translate3d(${-position.x}%, ${-position.y}%, 0)`,
         }}>
 
           <Image src={bg2} alt={""} className="scale-150 object-cover bgleftToRight-slide" />
         </div>
 
-        <div className="absolute z-30 top-0 inset-0 transition-transform duration-500 ease-out  " style={{
+        <div className="hidden md:block absolute z-30 top-0 inset-0 transition-transform duration-500 ease-out  " style={{
           transform: `translate3d(${position.x}%, ${position.y}%, 0)`,
         }}>
 
@@ -123,57 +136,65 @@ export default function Home() {
           <div className="gradient-overlay svelte-1lc7tvy"></div>
         </div>
       </div>
-     <div className="block md:hidden h-full w-full object-cover  -translate-y-52" style={{ clipPath: "polygon(0 15%, 100% 0, 100% 85%, 0% 100%)" }}>
-      <Image src="https://cdn.sanity.io/images/6jywt20u/production/4c4adc11b7ca6ea25c7e7cba555d8f0b06488f3f-7952x5304.jpg?w=2560&auto=format" height={550} width={750}  alt="" className="object-cover"/>
-     </div>
+      <div className="block md:hidden h-full w-full object-cover  -translate-y-52" style={{ clipPath: "polygon(0 15%, 100% 0, 100% 85%, 0% 100%)" }}>
+        <Image src="https://cdn.sanity.io/images/6jywt20u/production/4c4adc11b7ca6ea25c7e7cba555d8f0b06488f3f-7952x5304.jpg?w=2560&auto=format" height={550} width={750} alt="" className="object-cover" />
+      </div>
+
       {/*Section 2 Customer Delight  */}
-      <section className="" ref={containerRef}>
+      <section className="-mt-24" ref={containerRef}>
 
         <div className="lg:max-w-[85vw] md:max-w-[90vw] max-w-[80vw]   mx-auto ">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <h2 className="text-primary font-semibold tracking-wide">POWERING THE FUTURE OF FINANCE</h2>
-              <h3 className="text-4xl font-bold">Uncovering new ways to delight customers</h3>
+              <h2 className="text-primary font-bold tracking-widest">POWERING THE FUTURE OF FINANCE</h2>
+              <h3 className="text-4xl md:text-6xl font-bold">Uncovering new ways to delight customers</h3>
 
               <div className="md:hidden block relative h-[620px] ">
 
-              {/* BG image */}
-              <motion.div className="absolute top-5 left-5 h-full  w-full object-cover z-0 duration-[2000ms] transition-transform ease-out" style={{ translateY }}
-                transition={{
-                  duration: 5 // Optional: You can control the duration as well
-                }}>
-                <Image src={cardbg} alt=""></Image>
-              </motion.div>
-              <div className="absolute bottom-[-60%] left-5 h-full w-ful object-cover z-30 scale-110">
-                <Image
-                  src={cardforbg}
-                  alt=""
-                />
-              </div>
-
-
-              <div className="absolute flex flex-col items-center justify-center h-full w-full z-20">
-
-                <div className="relative">
-                  {/* floating icons */}
-                  <div className=" w-20 h-20 absolute top-40 -left-10 z-30 rounded-full floating">
-                    <Image fill src="https://cdn.sanity.io/images/6jywt20u/production/f034c835798f95c1ce84f9c34ba48682b6383d06-89x88.svg?w=89&auto=format" alt="" />
-                  </div>
+                {/* BG image */}
+                <motion.div className="absolute top-28 left-5 h-full w-full object-cover z-0 duration-[2000ms] transition-transform ease-out"
+                  style={{ translateY }}
+                  transition={{
+                    duration: 5
+                  }}>
+                  <Image className="scale-105 md:scale-110" src={cardbg} alt=""></Image>
+                </motion.div>
+                <div className="absolute bottom-[-60%] left-5 h-full w-ful object-cover z-30 scale-110">
                   <Image
-                    src="https://cdn.sanity.io/images/6jywt20u/production/5ca8af1a922b106b962c34781483bc8e6e066688-1124x1364.png?w=1124&auto=format"
-                    alt="Customer service illustration"
-                    width={400}
-                    height={600}
-                    style={{ boxShadow: '0px 23px 30px 0px #16437763' }}
+                    src={cardforbg}
+                    alt=""
                   />
                 </div>
 
 
+                <div className="absolute flex flex-col items-center justify-center h-full w-full z-20">
+
+                  <div className="relative">
+                    {/* floating icons */}
+                    <div className=" w-20 h-20 absolute top-40 left-16 z-30 rounded-full floating">
+                      <Image fill src="https://cdn.sanity.io/images/6jywt20u/production/f034c835798f95c1ce84f9c34ba48682b6383d06-89x88.svg?w=89&auto=format" alt="" />
+                    </div>
+                    <div className=" w-16 h-16 absolute top-28 -left-10 z-30 rounded-full floating">
+                      <Image fill src="https://cdn.sanity.io/images/6jywt20u/production/c544c6e75349fb440fc0938052f9288519c87bec-74x75.svg?w=74&auto=format" alt="" />
+                    </div>
+                    <div className=" w-24 h-24 absolute top-20 -right-10 z-30 rounded-full floating">
+                      <Image fill src="https://cdn.sanity.io/images/6jywt20u/production/0f6c8e3f8d16b88978823d82126b03593266eb79-116x115.svg?w=116&auto=format" alt="" />
+                    </div>
+                    <Image
+                      src="https://cdn.sanity.io/images/6jywt20u/production/5ca8af1a922b106b962c34781483bc8e6e066688-1124x1364.png?w=1124&auto=format"
+                      alt="Customer service illustration"
+                      width={320}
+                      height={520}
+                      style={{ boxShadow: '0px 23px 30px 0px #16437763' }}
+                    />
+                  </div>
+
+
+                </div>
+
               </div>
 
-            </div>
-
-              <p className="text-gray-600">
+              <p className="text-gray-600 font-bold">
                 AnyTech is revolutionizing financial technology by introducing innovative solutions that drive
                 exceptional payment processing capabilities, enhancing your business efficiency.
               </p>
@@ -200,9 +221,15 @@ export default function Home() {
 
                 <div className="relative">
                   {/* floating icons */}
-                  <div className=" w-20 h-20 absolute top-40 -left-10 z-30 rounded-full floating">
-                    <Image fill src="https://cdn.sanity.io/images/6jywt20u/production/f034c835798f95c1ce84f9c34ba48682b6383d06-89x88.svg?w=89&auto=format" alt="" />
-                  </div>
+                  <div className=" w-20 h-20 absolute top-40 left-16 z-30 rounded-full floating">
+                      <Image fill src="https://cdn.sanity.io/images/6jywt20u/production/f034c835798f95c1ce84f9c34ba48682b6383d06-89x88.svg?w=89&auto=format" alt="" />
+                    </div>
+                    <div className=" w-16 h-16 absolute top-28 -left-10 z-30 rounded-full floating">
+                      <Image fill src="https://cdn.sanity.io/images/6jywt20u/production/c544c6e75349fb440fc0938052f9288519c87bec-74x75.svg?w=74&auto=format" alt="" />
+                    </div>
+                    <div className=" w-24 h-24 absolute top-20 -right-10 z-30 rounded-full floating">
+                      <Image fill src="https://cdn.sanity.io/images/6jywt20u/production/0f6c8e3f8d16b88978823d82126b03593266eb79-116x115.svg?w=116&auto=format" alt="" />
+                    </div>
                   <Image
                     src="https://cdn.sanity.io/images/6jywt20u/production/5ca8af1a922b106b962c34781483bc8e6e066688-1124x1364.png?w=1124&auto=format"
                     alt="Customer service illustration"
@@ -225,7 +252,35 @@ export default function Home() {
       </section>
 
       {/*Section 3 Innovation  */}
+      <section className="mx-auto max-w-[95vw] md:max-w-[85vw] py-20 flex flex-col space-y-8">
 
+        {/* Paragraphs  */}
+        <div className="w-full flex flex-col items-center justify-center space-y-8">
+          <p className="text-blue-500 font-bold tracking-widest">OUR PHILOSOPHY</p>
+          <p className="text-4xl md:text-6xl font-bold text-center">Human-centred innovation</p>
+        </div>
+
+        {/* Image  (Full Width, Auto Height) */}
+        <div className="w-full">
+          <Image
+            src="https://cdn.sanity.io/images/6jywt20u/production/2d90adc3456764f98e38ce40b5ea7d7f52fd4ce1-2206x727.png?w=2206&auto=format"
+            alt=""
+            width={2206}
+            height={727}
+            layout="responsive"
+            className="object-cover hidden md:block"
+          />
+          <Image
+            src="https://cdn.sanity.io/images/6jywt20u/production/50bc481601f8adb912da12788f7d0143eb5b5eb3-1710x1965.png?w=1600&auto=format"
+            alt=""
+            width={2206}
+            height={727}
+            layout="responsive"
+            className="object-cover md:hidden p-6"
+          />
+        </div>
+        <FeaturesSection />
+      </section>
 
       {/* Carrosel Section */}
       <section>
@@ -239,20 +294,20 @@ export default function Home() {
       {/* Stats Section */}
 
       <section className="py-20">
-        <div className="lg:max-w-[70vw] md:max-w-[75vw] max-w-[65vw]  mx-auto px-4">
+        <div className="lg:max-w-[70vw] md:max-w-[75vw] max-w-[85vw] mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="md:grid md:grid-cols-3 flex flex-col gap-8">
-              <div className="text-center flex md:flex-col md:items-center md:justify-center  gap-10 md:border-0 border-b-2 border-dashed border-blue-300 justify-between pb-4">
+              <div className="text-center flex md:flex-col md:items-center  gap-10 md:border-0 border-b-2 border-dashed border-blue-300 justify-between pb-4 h-full">
                 <Counter end={20} prefix=">" />
                 <div className="text-gray-600 md:text-2xl text-lg font-bold md:font-normal">Years of experience</div>
               </div>
-              <div className="text-center flex md:flex-col md:items-center md:justify-center  gap-10 md:border-0 border-b-2 border-dashed border-blue-300 justify-between pb-4">
+              <div className="text-center flex md:flex-col md:items-center   gap-10 md:border-0 border-b-2 border-dashed border-blue-300 justify-between pb-4 h-full">
                 <Counter end={40} prefix="" suffix="+" />
                 <div className="text-gray-600 md:text-2xl text-lg font-bold md:font-normal">Financial institutions</div>
               </div>
-              <div className="text-center flex md:flex-col md:items-center md:justify-center gap-10 md:border-0 border-b-2 border-dashed border-blue-300 justify-between pb-4">
+              <div className="text-center flex md:flex-col md:items-center  gap-10 md:border-0 border-b-2 border-dashed border-blue-300 justify-between pb-4 h-full">
                 <Counter end={200} prefix=">" suffix="m" />
-                <div className="text-gray-600 md:text-2xl text-lg font-bold md:font-normal">Customers daily</div>
+                <div className="text-gray-600 md:text-2xl text-lg font-bold md:font-normal"> Customers   daily </div>
               </div>
             </div>
           </div>

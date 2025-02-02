@@ -24,20 +24,20 @@ const slides: TabSlide[] = [
       "https://cdn.sanity.io/images/6jywt20u/production/c0be857dbe1878b1866b6bd0ddda7945d0f2779b-3672x2712.jpg?w=960&auto=format",
   },
   {
-    title: "Customer focused 2",
+    title: "Agile and adaptable",
     subtitle: "Purpose-built financial services",
     description:
       "Elevate customer experience and achieve agile financial product innovation with the world's first, consumer-centric, real-time transaction account processing and credit limit system.",
     image:
-      "https://cdn.sanity.io/images/6jywt20u/production/c0be857dbe1878b1866b6bd0ddda7945d0f2779b-3672x2712.jpg?w=960&auto=format",
+      "https://cdn.sanity.io/images/6jywt20u/production/56e02fe1cf2f41ff52aebe65d2e1466e93a9581b-6400x4800.jpg?w=960&auto=format",
   },
   {
-    title: "Customer focused 3",
+    title: "Compliance ready",
     subtitle: "Purpose-built financial services",
     description:
       "Elevate customer experience and achieve agile financial product innovation with the world's first, consumer-centric, real-time transaction account processing and credit limit system.",
     image:
-      "https://cdn.sanity.io/images/6jywt20u/production/c0be857dbe1878b1866b6bd0ddda7945d0f2779b-3672x2712.jpg?w=960&auto=format",
+      "https://cdn.sanity.io/images/6jywt20u/production/2b48e3b3fe95abd21ff8cb659f26ca05d91e9ef7-1509x1284.png?w=960&auto=format",
   },
   // ... other slides
 ]
@@ -144,7 +144,7 @@ export default function FinanceTabsCarousel() {
 
       <div
         className={cn(
-          "relative overflow-hidden h-[800px] md:h-[500px] shadow-lg rounded-lg ",
+          "relative overflow-hidden h-[800px] md:h-[500px] shadow-lg rounded-xl",
           isDragging ? "cursor-grabbing" : "cursor-grab"
         )}
         {...bind()}
@@ -165,7 +165,7 @@ export default function FinanceTabsCarousel() {
             style={{ touchAction: "pan-y pinch-zoom" }}
           >
             <Card className="border-0 shadow-none h-full ">
-              <CardContent className="flex flex-col md:grid md:grid-cols-2 gap-8 p-16 h-full">
+              <CardContent className="flex flex-col md:grid md:grid-cols-2 gap-8 md:p-16 p-8 h-full">
                 <div className="space-y-6 flex flex-col justify-center">
                   <div className="flex-1 lg:space-y-8 space-y-6">
                   <h1 className="text-xl md:text-sm font-bold text-blue-400 font-montserrat tracking-[3px] uppercase">{slides[activeTab].title}</h1>

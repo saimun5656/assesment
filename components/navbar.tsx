@@ -34,24 +34,6 @@ const solutions = [
   },
 ]
 
-const services = [
-  {
-    title: "Consulting Services",
-    href: "/services/consulting",
-    description: "Expert guidance for your financial technology needs",
-  },
-  {
-    title: "Implementation",
-    href: "/services/implementation",
-    description: "Seamless integration of our solutions",
-  },
-  {
-    title: "Support & Maintenance",
-    href: "/services/support",
-    description: "24/7 technical support and system maintenance",
-  },
-]
-
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isServicesOpen, setIsServicesOpen] = useState(false)
@@ -100,7 +82,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           <div>
             <Link href="/" className={`font-bold text-2xl ${textColorClass}`}>
-            <Image
+              <Image
                 src={isScrolled ? IconAlt : Icon}
                 alt="ANYTECH"
                 width={140}
@@ -147,7 +129,7 @@ export default function Navbar() {
                 </NavigationMenuList>
               </NavigationMenu>
 
-              <Link href="/service">
+              <Link href="/services">
                 <Button variant="link" className={textColorClass}>
                   Service
                 </Button>
@@ -160,20 +142,34 @@ export default function Navbar() {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <Button variant="" className={textColorClass}>
-              EN
-            </Button>
+
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className={`bg-transparent ${textColorClass}`}>
+                    EN
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[100px] gap-3 p-4 bg-white shadow-md">
+                      <li className="border-b-2 pb-2">bg</li>
+                      <li className="border-b-2 pb-2">cn</li>
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+
             <Link href="/contact">
               <Button className={`hidden md:inline-flex ${buttonColorClass}`}>Contact Us</Button>
             </Link>
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild className="md:hidden">
-                <Button variant="" className={`p-0 ${textColorClass}`}>
-                  {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                <Button className={`p-0 ${textColorClass}`}>
+                  {isOpen ? "" : <Menu className="h-10 w-10" />}
                 </Button>
               </SheetTrigger>
               <SheetContent side="top" className="w-full p-0 bg-gradient-to-br from-[#0061ff] to-[#00a6ff]">
-                <div className="flex flex-col h-[calc(100vh-5rem)] p-6 mt-20">
+                <div className="flex flex-col h-[calc(100vh-10rem)] p-6 mt-20">
                   <div className="flex flex-col gap-6">
                     <Collapsible>
                       <CollapsibleTrigger className="flex items-center justify-between w-full text-white text-2xl font-normal">
